@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BitClicker</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <header>
+        <h2 id="msg">Нажмите на кнопку "Начать", чтобы начать</h2>
+        <div class="btns">
+            <button class="btn-red" onclick="clearProgress()">Сбросить прогресс</button>
+            <button class="btn-green" onclick="startGame()">Начать</button>
+        </div>
+    </header>
+
+    <section id="main">
+        <div class="left">
+            <h1>Кликов за раунд: <span id="round-clicks"></span></h1>
+            <h1>Рекорд кликов: <span id="max-clicks"></span></h1>
+            <h1>Время на раунд: <span id="timer">30</span> сек.</h1>
+        </div>
+        <div>
+            <img id="coin" src="img/coin.png" alt="bitcoin">
+        </div>
+    </section>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

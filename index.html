@@ -13,7 +13,8 @@
         <h2 id="msg">Нажмите на кнопку "Начать", чтобы начать</h2>
         <div class="btns">
             <button class="btn-red" onclick="clearProgress()">Сбросить прогресс</button>
-            <button class="btn-grey" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-shopping-bag"></i></button>
+            <button class="btn-grey clear" data-toggle="modal" data-target="#shopModal"><i class="fa fa-shopping-bag"></i></button>
+            <button class="btn-grey noclear" data-toggle="modal" data-target="#scoreModal"><i class="fa fa-trophy"></i></button>
             <button class="btn-green" onclick="startGame()">Начать</button>
         </div>
     </header>
@@ -22,7 +23,7 @@
         <div class="left">
             <h1>Кликов за раунд: <span id="round-clicks"></span></h1>
             <h1>Рекорд кликов: <span id="max-clicks"></span></h1>
-            <h1>Время на раунд: <span id="timer">30</span> сек.</h1>
+            <h1>Время на раунд: <span id="timer"></span> сек.</h1>
             <h1>Монеты: <span id="money">0</span></h1>
         </div>
         <div>
@@ -30,7 +31,7 @@
         </div>
     </section>
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="shopModal" tabindex="-1" role="dialog" aria-labelledby="shop" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -40,12 +41,79 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="block mb-4">
-                        <div class="title">
+                    <div class="block mb-5">
+                        <div>
                             <h3>+1 Автокликер</h3>
                             <span class="text-muted">При старте раунда, каждые две секунды бедет автоматически нажиматься биткоин <span id="localStorageAutoClickerCount"></span> раз</span>
                         </div>
-                        <button class="btn btn-primary mt-3" id="buyOneAutoclicker">Купить 5$</button>
+                        <button class="btn btn-outline-primary mt-3" id="buyOneAutoclicker">Купить за 10 монет</button>
+                    </div>
+                    <div class="block mb-5">
+                        <div>
+                            <h3>+1 Секунда к длительности раунда</h3>
+                            <span class="text-muted">При покупке раунд будет длиться не <span id="localStorageRoundCountOld"></span> секунд, а <span id="localStorageRoundCountNew"></span> секунд.</span>
+                        </div>
+                        <button class="btn btn-outline-primary mt-3" id="buyOneSecForRoundTime">Купить за 13 монет</button>
+                    </div>
+                    <div class="block">
+                        <div>
+                            <h3>X2 Клик</h3>
+                            <span class="text-muted">При старте раунда, когда вы будете нажимать на биткоин, он будет нажиматся ещё один раз автоматически.</span>
+                        </div>
+                        <button class="btn btn-outline-primary mt-3" id="buyX2Click"></button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="scoreModal" tabindex="-1" role="dialog" aria-labelledby="shop" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Награды за рекорды</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="block mb-5">
+                        <div>
+                            <h3>Новичок в деле!</h3>
+                            <span class="text-muted">Чтобы получить, поставьте рекорд не меньше 50 очков</span>
+                        </div>
+                        <button class="btn btn-outline-danger mt-3" id="novichokVDele">Не доступно</button>
+                    </div>
+                    <div class="block mb-5">
+                        <div>
+                            <h3>Новичок со 2 уровнем</h3>
+                            <span class="text-muted">Чтобы получить, поставьте рекорд не меньше 120 очков</span>
+                        </div>
+                        <button class="btn btn-outline-danger mt-3" id="novichokS2LvL">Не доступно</button>
+                    </div>
+                    <div class="block mb-5">
+                        <div>
+                            <h3>Уже не новичок!</h3>
+                            <span class="text-muted">Чтобы получить, поставьте рекорд не меньше 300 очков</span>
+                        </div>
+                        <button class="btn btn-outline-danger mt-3" id="uzheNeNovichok">Не доступно</button>
+                    </div>
+                    <div class="block mb-5">
+                        <div>
+                            <h3>Теперь профи!</h3>
+                            <span class="text-muted">Чтобы получить, поставьте рекорд не меньше 500 очков</span>
+                        </div>
+                        <button class="btn btn-outline-danger mt-3" id="teperProfi">Не доступно</button>
+                    </div>
+                    <div class="block">
+                        <div>
+                            <h3>Монстр - Победитель!</h3>
+                            <span class="text-muted">Чтобы получить, поставьте рекорд не меньше 1000 очков</span>
+                        </div>
+                        <button class="btn btn-outline-danger mt-3" id="mostrWinner">Не доступно</button>
                     </div>
                 </div>
                 <div class="modal-footer">

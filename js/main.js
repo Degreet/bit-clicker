@@ -21,6 +21,9 @@ else {
 }
 
 if (!localStorage.autoclicker) localStorage.autoclicker = 0
+if (!localStorage.roundTime) localStorage.roundTime = 30
+
+document.getElementById('timer').innerHTML = +localStorage.roundTime
 
 function play() {
     coin.onclick = function () {
@@ -33,10 +36,15 @@ function play() {
                 recordClicks.innerText = clicks
             }
 
-            if (clicks == 10 || clicks == 20 || clicks == 30 || clicks == 50 || clicks == 80 || clicks == 100 || clicks == 120 || clicks == 150 || clicks == 180 || clicks == 200 || clicks == 250 || clicks == 300) {
+            if (clicks == 50 || clicks == 100 || clicks == 150 || clicks == 200 || clicks == 220 || clicks == 250 ||
+                clicks == 300 || clicks == 350 || clicks == 400 || clicks == 450 || clicks == 500 || clicks == 550 ||
+                clicks == 600 || clicks == 650 || clicks == 700 || clicks == 750 || clicks == 800 || clicks == 850 ||
+                clicks == 900 || clicks == 950 || clicks == 1000) {
                 money.innerText++
                 localStorage.money = money.innerText
             }
+
+            if (localStorage.x2Click) coin.click()
         }
     }
 
@@ -71,10 +79,8 @@ function timer() {
         msg.innerText = "Раунд окончен"
         timeGo = 0
         setTimeout(function(){}, 1000)
-        time.innerText = 30
-    } else {
-        setTimeout(timer, 1000)
-    }
+        time.innerText = localStorage.roundTime
+    } else setTimeout(timer, 1000)
 }
 
 function clearProgress() {
@@ -82,22 +88,148 @@ function clearProgress() {
     if (success) {
         localStorage.clear()
         location.reload()
-    } else {
-        msg.innerText = "Вы успешно отменили удаление данных"
-    }
+    } else msg.innerText = "Вы успешно отменили удаление данных"
 }
 
 buyOneAutoclicker.onclick = () => {
-    if (localStorage.money >= 5) {
-        alert("Вы успешно преобрели 1 автокликер за 5 монет!")
-        localStorage.money -= 5
-        money.innerText -= 5
-        localStorage.autoclicker++
-        location.reload()
-    } else {
-        alert("Недостаточно монет.")
-    }
+    if (localStorage.autoclicker <= 30) {
+        if (localStorage.money >= 10) {
+            alert("Вы успешно преобрели 1 автокликер за 10 монет!")
+            localStorage.money -= 10
+            money.innerText -= 10
+            localStorage.autoclicker++
+            location.reload()
+        } else {
+            alert("Недостаточно монет.")
+        }
+    } else alert("Вы преобрели максимальный уровень данного товара!")
 }
 
-setInterval(() => localStorageAutoClickerCount.innerText = +localStorage.autoclicker + 1, 50)
+buyOneSecForRoundTime.onclick = () => {
+    if (localStorage.roundTime <= 120) {
+        if (localStorage.money >= 13) {
+            alert("Вы успешно продлили раунд на 1 секунду за 13 монет!")
+            localStorage.money -= 13
+            money.innerText -= 13
+            localStorage.roundTime++
+            location.reload()
+        } else {
+            alert("Недостаточно монет.")
+        }
+    } else alert("Вы преобрели максимальный уровень данного товара!")
+}
+
+buyX2Click.onclick = () => {
+    if (!localStorage.x2Click) {
+        if (localStorage.money >= 45) {
+            alert("Вы успешно преобрели X2 Click за 45 монет!")
+            localStorage.money -= 45
+            money.innerText -= 45
+            localStorage.x2Click = true
+            location.reload()
+        } else {
+            alert("Недостаточно монет.")
+        }
+    } else alert("Вы уже преобрели X2 Click!")
+}
+
+novichokVDele.onclick = () => {
+    if (localStorage.record_click >= 50 && !localStorage.novichokVDele) {
+        alert("Вы успешно забрали 10 монет!")
+        for (let i = 0; i < 10; i++) localStorage.money++
+        money.innerText = localStorage.money
+        localStorage.novichokVDele = true
+        location.reload()
+    } else alert("Вы не можете забрать данную награду!")
+}
+
+novichokS2LvL.onclick = () => {
+    if (localStorage.record_click >= 120 && !localStorage.novichokS2LvL) {
+        alert("Вы успешно забрали 10 монет!")
+        for (let i = 0; i < 10; i++) localStorage.money++
+        money.innerText = localStorage.money
+        localStorage.novichokS2LvL = true
+        location.reload()
+    } else alert("Вы не можете забрать данную награду!")
+}
+
+uzheNeNovichok.onclick = () => {
+    if (localStorage.record_click >= 300 && !localStorage.uzheNeNovichok) {
+        alert("Вы успешно забрали 10 монет!")
+        for (let i = 0; i < 10; i++) localStorage.money++
+        money.innerText = localStorage.money
+        localStorage.uzheNeNovichok = true
+        location.reload()
+    } else alert("Вы не можете забрать данную награду!")
+}
+
+teperProfi.onclick = () => {
+    if (localStorage.record_click >= 500 && !localStorage.teperProfi) {
+        alert("Вы успешно забрали 15 монет!")
+        for (let i = 0; i < 15; i++) localStorage.money++
+        money.innerText = localStorage.money
+        localStorage.teperProfi = true
+        location.reload()
+    } else alert("Вы не можете забрать данную награду!")
+}
+
+mostrWinner.onclick = () => {
+    if (localStorage.record_click >= 500 && !localStorage.mostrWinner) {
+        alert("Вы успешно забрали 20 монет!")
+        for (let i = 0; i < 20; i++) localStorage.money++
+        money.innerText = localStorage.money
+        localStorage.mostrWinner = true
+        location.reload()
+    } else alert("Вы не можете забрать данную награду!")
+}
+
+setInterval(() => {
+    localStorageAutoClickerCount.innerText = +localStorage.autoclicker + 1
+    localStorageRoundCountOld.innerText = +localStorage.roundTime
+    localStorageRoundCountNew.innerText = +localStorage.roundTime + 1
+
+    if (!localStorage.x2Click) buyX2Click.innerText = 'Купить за 45 монет'
+    else {
+        buyX2Click.innerText = 'Куплено'
+        buyX2Click.className = 'btn btn-outline-danger mt-3'
+    }
+
+    if (localStorage.roundTime <= 120) buyOneSecForRoundTime.innerText = 'Купить за 13 монет'
+    else {
+        buyOneSecForRoundTime.innerText = 'Куплено'
+        buyOneSecForRoundTime.className = 'btn btn-outline-danger mt-3'
+    }
+
+    if (localStorage.autoclicker <= 30) buyOneAutoclicker.innerText = 'Купить за 10 монет'
+    else {
+        buyOneAutoclicker.innerText = 'Куплено'
+        buyOneAutoclicker.className = 'btn btn-outline-danger mt-3'
+    }
+
+    if (localStorage.record_click >= 50 && !localStorage.novichokVDele) {
+        novichokVDele.innerText = 'Забрать 10 монет'
+        novichokVDele.className = 'btn btn-outline-primary mt-3'
+    } else novichokVDele.innerText = 'Не доступно'
+
+    if (localStorage.record_click >= 120 && !localStorage.novichokS2LvL) {
+        novichokS2LvL.innerText = 'Забрать 10 монет'
+        novichokS2LvL.className = 'btn btn-outline-primary mt-3'
+    } else novichokS2LvL.innerText = 'Не доступно'
+
+    if (localStorage.record_click >= 300 && !localStorage.uzheNeNovichok) {
+        uzheNeNovichok.innerText = 'Забрать 10 монет'
+        uzheNeNovichok.className = 'btn btn-outline-primary mt-3'
+    } else uzheNeNovichok.innerText = 'Не доступно'
+
+    if (localStorage.record_click >= 500 && !localStorage.teperProfi) {
+        teperProfi.innerText = 'Забрать 15 монет'
+        teperProfi.className = 'btn btn-outline-primary mt-3'
+    } else teperProfi.innerText = 'Не доступно'
+
+    if (localStorage.record_click >= 1000 && !localStorage.mostrWinner) {
+        mostrWinner.innerText = 'Забрать 20 монет'
+        mostrWinner.className = 'btn btn-outline-primary mt-3'
+    } else mostrWinner.innerText = 'Не доступно'
+}, 50)
+
 play()

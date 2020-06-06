@@ -14,6 +14,7 @@ header {
 
 * {
     box-sizing: border-box;
+    outline: none !important;
 }
 
 .btn-green {
@@ -31,7 +32,7 @@ header {
     padding: .375rem .75rem;
     height: 42px;
     position: relative;
-    right: 15px;
+    right: 30px;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
@@ -70,6 +71,34 @@ header {
     box-shadow: 0 0 0 0.2rem rgba(225,83,97,.5);
 }
 
+.btn-grey {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+    display: inline-block;
+    font-weight: 400;
+    border: 1px solid transparent;
+    font-size: 1rem;
+    line-height: 1.5;
+    outline: none;
+    padding: .375rem .75rem;
+    height: 42px;
+    margin-right: 10px;
+    position: relative;
+    right: 15px;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.btn-grey:hover {
+    color: #fff;
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+.btn-grey:focus {
+    box-shadow: 0 0 0 0.2rem rgba(108,117,125,.5)
+}
+
 #msg {
     margin-top: 0;
     color: #155724;
@@ -87,7 +116,7 @@ header {
     color: #0c5460;
     background-color: #d1ecf1;
     border-color: #bee5eb;
-    width: 200px;
+    width: 240px;
     font-size: 16px;
     padding: .75rem 1.25rem;
     border-radius: .25rem;
@@ -98,10 +127,7 @@ header {
     margin-top: 100px;
     display: flex;
     justify-content: center;
-}
-
-#main div.left {
-    margin-top: 50px;
+    align-items: center;
 }
 
 #main div img {
@@ -142,6 +168,10 @@ header {
         border-bottom-left-radius: .25rem;
     }
 
+    .btn-grey {
+        margin-right: -5px;
+    }
+
     .btns {
         display: flex;
         justify-content: center;
@@ -159,13 +189,17 @@ header {
         margin-top: 20px;
     }
 
-    #main div h1 {
+    #main div h1:not(:last-child) {
         margin-right: 5px;
-        border-radius: unset;
     }
 
-    #main div h1:nth-child(3) {
-        margin-right: 0;
+    #main div h1 {
+        padding: 10px 3px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: unset;
     }
 
     #main div img {

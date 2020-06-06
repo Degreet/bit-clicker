@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>BitClicker</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
@@ -11,6 +13,7 @@
         <h2 id="msg">Нажмите на кнопку "Начать", чтобы начать</h2>
         <div class="btns">
             <button class="btn-red" onclick="clearProgress()">Сбросить прогресс</button>
+            <button class="btn-grey" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-shopping-bag"></i></button>
             <button class="btn-green" onclick="startGame()">Начать</button>
         </div>
     </header>
@@ -20,12 +23,40 @@
             <h1>Кликов за раунд: <span id="round-clicks"></span></h1>
             <h1>Рекорд кликов: <span id="max-clicks"></span></h1>
             <h1>Время на раунд: <span id="timer">30</span> сек.</h1>
+            <h1>Монеты: <span id="money">0</span></h1>
         </div>
         <div>
             <img id="coin" src="img/coin.png" alt="bitcoin">
         </div>
     </section>
 
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Магазин</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="block mb-4">
+                        <div class="title">
+                            <h3>+1 Автокликер</h3>
+                            <span class="text-muted">При старте раунда, каждые две секунды бедет автоматически нажиматься биткоин <span id="localStorageAutoClickerCount"></span> раз</span>
+                        </div>
+                        <button class="btn btn-primary mt-3" id="buyOneAutoclicker">Купить 5$</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

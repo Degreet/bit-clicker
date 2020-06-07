@@ -6,6 +6,7 @@ const coin = document.getElementById("coin")
 let i
 let timeGo = 0
 let autoclickerInterval
+var coinSound = new Audio('coin.mp3')
 roundClicks.innerText = 0
 
 if (localStorage.getItem("record_click")) recordClicks.innerText = localStorage.getItem("record_click")
@@ -30,6 +31,9 @@ function play() {
         if (timeGo !== 1) {
             msg.innerText = 'Нажмите на кнопку "Начать" чтобы играть'
         } else {
+            coinSound.currentTime = 0
+            coinSound.play()
+
             let clicks = roundClicks.innerHTML++ + 1
             if (clicks > localStorage.getItem("record_click")) {
                 localStorage.setItem("record_click", clicks)
@@ -140,7 +144,10 @@ novichokVDele.onclick = () => {
         money.innerText = localStorage.money
         localStorage.novichokVDele = true
         location.reload()
-    } else alert("Вы не можете забрать данную награду!")
+    } else {
+        if (localStorage.record_click <= 50) alert("У вас рекорд меньше чем требуется!")
+        else if (localStorage.novichokVDele) alert("Вы уже получили эту награду!")
+    }
 }
 
 novichokS2LvL.onclick = () => {
@@ -150,7 +157,10 @@ novichokS2LvL.onclick = () => {
         money.innerText = localStorage.money
         localStorage.novichokS2LvL = true
         location.reload()
-    } else alert("Вы не можете забрать данную награду!")
+    } else {
+        if (localStorage.record_click <= 120) alert("У вас рекорд меньше чем требуется!")
+        else if (localStorage.novichokS2LvL) alert("Вы уже получили эту награду!")
+    }
 }
 
 uzheNeNovichok.onclick = () => {
@@ -160,7 +170,10 @@ uzheNeNovichok.onclick = () => {
         money.innerText = localStorage.money
         localStorage.uzheNeNovichok = true
         location.reload()
-    } else alert("Вы не можете забрать данную награду!")
+    } else {
+        if (localStorage.record_click <= 300) alert("У вас рекорд меньше чем требуется!")
+        else if (localStorage.uzheNeNovichok) alert("Вы уже получили эту награду!")
+    }
 }
 
 teperProfi.onclick = () => {
@@ -170,17 +183,23 @@ teperProfi.onclick = () => {
         money.innerText = localStorage.money
         localStorage.teperProfi = true
         location.reload()
-    } else alert("Вы не можете забрать данную награду!")
+    } else {
+        if (localStorage.record_click <= 500) alert("У вас рекорд меньше чем требуется!")
+        else if (localStorage.teperProfi) alert("Вы уже получили эту награду!")
+    }
 }
 
 mostrWinner.onclick = () => {
-    if (localStorage.record_click >= 500 && !localStorage.mostrWinner) {
+    if (localStorage.record_click >= 1000 && !localStorage.mostrWinner) {
         alert("Вы успешно забрали 20 монет!")
         for (let i = 0; i < 20; i++) localStorage.money++
         money.innerText = localStorage.money
         localStorage.mostrWinner = true
         location.reload()
-    } else alert("Вы не можете забрать данную награду!")
+    } else {
+        if (localStorage.record_click <= 1000) alert("У вас рекорд меньше чем требуется!")
+        else if (localStorage.mostrWinner) alert("Вы уже получили эту награду!")
+    }
 }
 
 setInterval(() => {
@@ -209,27 +228,67 @@ setInterval(() => {
     if (localStorage.record_click >= 50 && !localStorage.novichokVDele) {
         novichokVDele.innerText = 'Забрать 10 монет'
         novichokVDele.className = 'btn btn-outline-primary mt-3'
-    } else novichokVDele.innerText = 'Не доступно'
+    } else {
+        if (localStorage.record_click <= 50) {
+            novichokVDele.innerText = 'В процессе'
+            novichokVDele.className = 'btn btn-outline-warning mt-3'
+        } else if (localStorage.novichokVDele) {
+            novichokVDele.innerText = 'Получено'
+            novichokVDele.className = 'btn btn-outline-danger mt-3'
+        }
+    }
 
     if (localStorage.record_click >= 120 && !localStorage.novichokS2LvL) {
         novichokS2LvL.innerText = 'Забрать 10 монет'
         novichokS2LvL.className = 'btn btn-outline-primary mt-3'
-    } else novichokS2LvL.innerText = 'Не доступно'
+    } else {
+        if (localStorage.record_click <= 120) {
+            novichokS2LvL.innerText = 'В процессе'
+            novichokS2LvL.className = 'btn btn-outline-warning mt-3'
+        } else if (localStorage.novichokS2LvL) {
+            novichokS2LvL.innerText = 'Получено'
+            novichokS2LvL.className = 'btn btn-outline-danger mt-3'
+        }
+    }
 
     if (localStorage.record_click >= 300 && !localStorage.uzheNeNovichok) {
         uzheNeNovichok.innerText = 'Забрать 10 монет'
         uzheNeNovichok.className = 'btn btn-outline-primary mt-3'
-    } else uzheNeNovichok.innerText = 'Не доступно'
+    } else {
+        if (localStorage.record_click <= 300) {
+            uzheNeNovichok.innerText = 'В процессе'
+            uzheNeNovichok.className = 'btn btn-outline-warning mt-3'
+        } else if (localStorage.uzheNeNovichok) {
+            uzheNeNovichok.innerText = 'Получено'
+            uzheNeNovichok.className = 'btn btn-outline-danger mt-3'
+        }
+    }
 
     if (localStorage.record_click >= 500 && !localStorage.teperProfi) {
         teperProfi.innerText = 'Забрать 15 монет'
         teperProfi.className = 'btn btn-outline-primary mt-3'
-    } else teperProfi.innerText = 'Не доступно'
+    } else {
+        if (localStorage.record_click <= 500) {
+            teperProfi.innerText = 'В процессе'
+            teperProfi.className = 'btn btn-outline-warning mt-3'
+        } else if (localStorage.teperProfi) {
+            teperProfi.innerText = 'Получено'
+            teperProfi.className = 'btn btn-outline-danger mt-3'
+        }
+    }
 
     if (localStorage.record_click >= 1000 && !localStorage.mostrWinner) {
         mostrWinner.innerText = 'Забрать 20 монет'
         mostrWinner.className = 'btn btn-outline-primary mt-3'
-    } else mostrWinner.innerText = 'Не доступно'
+    } else {
+        if (localStorage.record_click <= 1000) {
+            mostrWinner.innerText = 'В процессе'
+            mostrWinner.className = 'btn btn-outline-warning mt-3'
+        } else if (localStorage.mostrWinner) {
+            mostrWinner.innerText = 'Получено'
+            mostrWinner.className = 'btn btn-outline-danger mt-3'
+        }
+    }
 }, 50)
 
 play()

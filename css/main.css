@@ -140,7 +140,7 @@ header {
 
 #main div img {
     margin-left: 100px;
-    transition: all .3s ease;
+    transition: all .1s ease;
 }
 
 #main div img:hover {
@@ -150,6 +150,7 @@ header {
 
 #main div img:active {
     margin-top: 10px;
+    transform: scale(.9);
 }
 
 @media screen and (max-width: 687px) {

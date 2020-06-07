@@ -32,7 +32,7 @@ header {
     padding: .375rem .75rem;
     height: 42px;
     position: relative;
-    right: 35px;
+    right: 25px;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
@@ -89,14 +89,6 @@ header {
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
-.btn-grey.clear {
-    margin-right: 0 !important;
-}
-
-.btn-grey.noclear {
-    right: 20px;
-}
-
 .btn-grey:hover {
     color: #fff;
     background-color: #5a6268;
@@ -113,7 +105,7 @@ header {
     background-color: #d4edda;
     border-color: #c3e6cb;
     width: 400px;
-    font-size: 16px;
+    font-size: 15px;
     padding: .75rem 1.25rem;
     border-top-left-radius: .25rem;
     border-bottom-left-radius: .25rem;
@@ -135,12 +127,22 @@ header {
     margin-top: 100px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
+}
+
+#main div.left {
+    margin-top: 30px;
 }
 
 #main div img {
+    /* display: none; */
     margin-left: 100px;
     transition: all .1s ease;
+}
+
+#main div img.active {
+    /* margin-left: 100px; */
+    /* display: unset; */
 }
 
 #main div img:hover {
@@ -169,7 +171,7 @@ header {
     .btn-green {
         border-top-right-radius: .25rem;
         border-bottom-right-radius: .25rem;
-        right: 16px;
+        right: 20px;
     }
 
     .btn-red {
@@ -200,6 +202,10 @@ header {
         margin-top: 20px;
     }
 
+    #main div img.active {
+        margin-left: 0;
+    }
+
     #main div h1:not(:last-child) {
         margin-right: 5px;
     }
@@ -215,6 +221,7 @@ header {
 
     #main div img {
         margin-left: 0;
+        display: unset;
     }
 
     #main div:nth-child(2) {

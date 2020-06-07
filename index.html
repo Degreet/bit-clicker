@@ -10,24 +10,24 @@
 </head>
 <body>
     <header>
-        <h2 id="msg">Нажмите на кнопку "Играть", чтобы начать раунд</h2>
-        <div class="btns">
-            <button class="btn-red" onclick="clearProgress()">Сбросить прогресс</button>
-            <button class="btn-grey" style="margin-right:-5px" data-toggle="modal" data-target="#shopModal"><i class="fa fa-shopping-bag"></i></button>
-            <button class="btn-grey" style="margin-right:5px" data-toggle="modal" data-target="#scoreModal"><i class="fa fa-trophy"></i></button>
-            <button class="btn-green" onclick="startGame()">Играть</button>
+        <h2 class="alert alert-success mr-3" id="msg">Нажмите на кнопку "Играть", чтобы начать раунд</h2>
+        <div class="btn-group">
+            <button class="btn btn-success" onclick="startGame()">Играть</button>
+            <button class="btn btn-danger" data-toggle="modal" data-target="#shopModal"><i class="fa fa-shopping-bag"></i></button>
+            <button class="btn btn-danger" data-toggle="modal" data-target="#settingsModal"><i class="fa fa-cog"></i></button>
+            <button class="btn btn-danger" id="startSoundGame" data-toggle="modal" data-target="#scoreModal"><i class="fa fa-trophy"></i></button>
         </div>
     </header>
 
     <section id="main">
         <div class="left">
-            <h1>Кликов за раунд: <span id="round-clicks"></span></h1>
-            <h1>Рекорд кликов: <span id="max-clicks"></span></h1>
-            <h1>Время на раунд: <span id="timer"></span> сек.</h1>
-            <h1>Монеты: <span id="money">0</span></h1>
+            <h1 class="alert alert-primary">Кликов за раунд: <span id="round-clicks"></span></h1>
+            <h1 class="alert alert-primary">Рекорд кликов: <span id="max-clicks"></span></h1>
+            <h1 class="alert alert-primary">Время на раунд: <span id="timer"></span> сек.</h1>
+            <h1 class="alert alert-primary">Монеты: <span id="money">0</span></h1>
         </div>
         <div>
-            <img id="coin" src="img/coin.svg" alt="bitcoin">
+            <img id="coin" alt="bitcoin">
         </div>
     </section>
 
@@ -177,7 +177,42 @@
         </div>
     </div>
 
-    <a data-toggle="modal" data-target="#resultRound" href="" id="resultRoundHref"></a>
+    <div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="shop" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Настройки</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="block-inline mb-3">
+                        <h3>Картинка монеты</h3>
+                        <div class="btn-group btn-group-toggle" id="coinIconThemes" data-toggle="buttons">
+                            <label class="btn btn-secondary active" id="activeNewMoneyIcon">
+                                <input type="radio" name="options" id="newMoneyIcon" checked> Новая
+                            </label>
+                            <label class="btn btn-secondary" id="activeOldMoneyIcon">
+                                <input type="radio" name="options" id="oldMoneyIcon"> Старая
+                            </label>
+                        </div>
+                    </div>
+                    <div class="block-inline">
+                        <h3>Данные</h3>
+                        <div>
+                            <button class="btn btn-outline-danger" onclick="clearProgress()">Удалить</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="closeRes">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a data-toggle="modal" data-target="#endGameModal" href="" id="endGameModalStart"></a>
     <h1 id="roundStartText" class="unactive">Раунд начался!</h1>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

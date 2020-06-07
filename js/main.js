@@ -2,13 +2,17 @@ const msg = document.getElementById("msg")
 const roundClicks = document.getElementById("round-clicks")
 const recordClicks = document.getElementById("max-clicks")
 const time = document.getElementById('timer')
+const coinSound = new Audio('sound/coin.mp3')
+const btnSound = new Audio('sound/btn.mp3')
+const buttons = document.querySelectorAll('button')
 
 let i
 let timeGo = 0
 let ifRecordUpBool = false
 let autoclickerInterval
-var coinSound = new Audio('coin.mp3')
 roundClicks.innerText = 0
+
+if (!localStorage.moneyIconTheme) localStorage.moneyIconTheme = 'new'
 
 if (localStorage.getItem("record_click")) recordClicks.innerText = localStorage.getItem("record_click")
 else {
@@ -95,6 +99,7 @@ function timer() {
         ifRecordUpBool = false
         setTimeout(function(){}, 2000)
         time.innerText = localStorage.roundTime
+        msg.innerText = 'Нажмите на кнопку "Играть", чтобы начать раунд'
     } else setTimeout(timer, 1000)
 }
 
@@ -105,6 +110,13 @@ function clearProgress() {
         location.reload()
     } else msg.innerText = "Вы успешно отменили удаление данных"
 }
+
+buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        btnSound.currentTime = 0
+        btnSound.play()
+    })
+})
 
 buyOneAutoclicker.onclick = () => {
     if (localStorage.autoclicker <= 30) {
@@ -253,12 +265,53 @@ skillovik.onclick = () => {
     }
 }
 
+newMoneyIcon.onclick = () => {
+    localStorage.moneyIconTheme = 'new'
+    if (oldMoneyIcon.hasAttribute('checked')) {
+        oldMoneyIcon.removeAttribute('checked')
+        activeOldMoneyIcon.classList.remove('active')
+    }
+
+    activeNewMoneyIcon.classList.add('active')
+    newMoneyIcon.setAttribute('checked', '')
+}
+
+oldMoneyIcon.onclick = () => {
+    localStorage.moneyIconTheme = 'old'
+    if (newMoneyIcon.hasAttribute('checked')) {
+        newMoneyIcon.removeAttribute('checked')
+        activeNewMoneyIcon.classList.remove('active')
+    }
+
+    activeOldMoneyIcon.classList.add('active')
+    oldMoneyIcon.setAttribute('checked', '')
+}
+
 closeRes.onclick = () => roundAddedMoney.innerText = 0
 setInterval(() => {
     localStorageAutoClickerCount.innerText = +localStorage.autoclicker + 1
     localStorageRoundCountOld.innerText = localStorageRoundCount.innerText = +localStorage.roundTime
     localStorageRoundCountNew.innerText = +localStorage.roundTime + 1
+    coin.src = localStorage.moneyIconTheme == 'new' ? 'img/coin.svg' : 'img/coin.png'
     money.innerText = localStorage.money
+
+    if (localStorage.moneyIconTheme == 'new') {
+        if (oldMoneyIcon.hasAttribute('checked')) {
+            oldMoneyIcon.removeAttribute('checked')
+            activeOldMoneyIcon.classList.remove('active')
+        }
+
+        activeNewMoneyIcon.classList.add('active')
+        newMoneyIcon.setAttribute('checked', '')
+    } else if (localStorage.moneyIconTheme == 'old') {
+        if (newMoneyIcon.hasAttribute('checked')) {
+            newMoneyIcon.removeAttribute('checked')
+            activeNewMoneyIcon.classList.remove('active')
+        }
+    
+        activeOldMoneyIcon.classList.add('active')
+        oldMoneyIcon.setAttribute('checked', '')
+    }
 
     if (!localStorage.x2Click) buyX2Click.innerText = 'Купить за 45 монет'
     else {

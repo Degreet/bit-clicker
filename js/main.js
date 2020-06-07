@@ -1,6 +1,7 @@
 const msg = document.getElementById("msg")
 const roundClicks = document.getElementById("round-clicks")
 const recordClicks = document.getElementById("max-clicks")
+const time = document.getElementById('timer')
 
 let i
 let timeGo = 0
@@ -44,7 +45,9 @@ function play() {
             if (clicks == 50 || clicks == 100 || clicks == 150 || clicks == 200 || clicks == 220 || clicks == 250 ||
                 clicks == 300 || clicks == 350 || clicks == 400 || clicks == 450 || clicks == 500 || clicks == 550 ||
                 clicks == 600 || clicks == 650 || clicks == 700 || clicks == 750 || clicks == 800 || clicks == 850 ||
-                clicks == 900 || clicks == 950 || clicks == 1000) {
+                clicks == 900 || clicks == 950 || clicks == 1000 || clicks == 1100 || clicks == 1200 || clicks == 1300 ||
+                clicks == 1400 || clicks == 1500 || clicks == 1600 || clicks == 1700 || clicks == 1800 || clicks == 1900 ||
+                clicks == 2000 || clicks == 2100 || clicks == 2200 || clicks == 2300 || clicks == 2400 || clicks == 2500) {
                 money.innerText++
                 roundAddedMoney.innerText++
                 localStorage.money = money.innerText
@@ -71,6 +74,8 @@ function startGame() {
     if (timeGo !== 1) {
         roundClicks.innerText = 0
         document.querySelector('#main div img').className = 'active'
+        roundStartText.className = 'active'
+        setTimeout(() => roundStartText.className = 'unactive', 950)
         timer()
     } else {
         msg.innerText = "Игра уже идёт"
@@ -79,7 +84,6 @@ function startGame() {
 
 function timer() {
     timeGo = 1
-    let time = document.getElementById('timer')
     time.innerHTML--
    
     if (time.innerHTML == 0) {
@@ -134,6 +138,7 @@ buyOneSecForRoundTime.onclick = () => {
             localStorage.money -= 13
             money.innerText -= 13
             localStorage.roundTime++
+            time.innerText = localStorage.roundTime
         } else {
             alert("Недостаточно монет.")
         }
@@ -202,14 +207,49 @@ teperProfi.onclick = () => {
 }
 
 mostrWinner.onclick = () => {
-    if (localStorage.record_click >= 1000 && !localStorage.mostrWinner) {
+    if (localStorage.record_click >= 2000 && !localStorage.mostrWinner) {
         alert("Вы успешно забрали 20 монет!")
         for (let i = 0; i < 20; i++) localStorage.money++
         money.innerText = localStorage.money
         localStorage.mostrWinner = true
     } else {
-        if (localStorage.record_click <= 1000) alert("У вас рекорд меньше чем требуется!")
+        if (localStorage.record_click <= 2000) alert("У вас рекорд меньше чем требуется!")
         else if (localStorage.mostrWinner) alert("Вы уже получили эту награду!")
+    }
+}
+
+master.onclick = () => {
+    if (localStorage.record_click >= 1000 && !localStorage.master) {
+        alert("Вы успешно забрали 15 монет!")
+        for (let i = 0; i < 15; i++) localStorage.money++
+        money.innerText = localStorage.money
+        localStorage.master = true
+    } else {
+        if (localStorage.record_click <= 1000) alert("У вас рекорд меньше чем требуется!")
+        else if (localStorage.master) alert("Вы уже получили эту награду!")
+    }
+}
+
+korol.onclick = () => {
+    if (localStorage.record_click >= 1500 && !localStorage.korol) {
+        alert("Вы успешно забрали 15 монет!")
+        for (let i = 0; i < 15; i++) localStorage.money++
+        money.innerText = localStorage.money
+        localStorage.korol = true
+    } else {
+        if (localStorage.record_click <= 1500) alert("У вас рекорд меньше чем требуется!")
+        else if (localStorage.korol) alert("Вы уже получили эту награду!")
+    }
+}
+
+skillovik.onclick = () => {
+    if (localStorage.record_click >= 2500 && !localStorage.skillovik) {
+        alert("Вы успешно забрали 25 монет!")
+        for (let i = 0; i < 25; i++) localStorage.money++
+        localStorage.skillovik = true
+    } else {
+        if (localStorage.record_click <= 2500) alert("У вас рекорд меньше чем требуется!")
+        else if (localStorage.skillovik) alert("Вы уже получили эту награду!")
     }
 }
 
@@ -296,11 +336,37 @@ setInterval(() => {
         }
     }
 
-    if (localStorage.record_click >= 1000 && !localStorage.mostrWinner) {
+    if (localStorage.record_click >= 1500 && !localStorage.korol) {
+        korol.innerText = 'Забрать 15 монет'
+        korol.className = 'btn btn-outline-primary mt-3'
+    } else {
+        if (localStorage.record_click <= 1500) {
+            korol.innerText = 'В процессе'
+            korol.className = 'btn btn-outline-warning mt-3'
+        } else if (localStorage.korol) {
+            korol.innerText = 'Получено'
+            korol.className = 'btn btn-outline-danger mt-3'
+        }
+    }
+
+    if (localStorage.record_click >= 1000 && !localStorage.master) {
+        master.innerText = 'Забрать 15 монет'
+        master.className = 'btn btn-outline-primary mt-3'
+    } else {
+        if (localStorage.record_click <= 1000) {
+            master.innerText = 'В процессе'
+            master.className = 'btn btn-outline-warning mt-3'
+        } else if (localStorage.master) {
+            master.innerText = 'Получено'
+            master.className = 'btn btn-outline-danger mt-3'
+        }
+    }
+
+    if (localStorage.record_click >= 2000 && !localStorage.mostrWinner) {
         mostrWinner.innerText = 'Забрать 20 монет'
         mostrWinner.className = 'btn btn-outline-primary mt-3'
     } else {
-        if (localStorage.record_click <= 1000) {
+        if (localStorage.record_click <= 2000) {
             mostrWinner.innerText = 'В процессе'
             mostrWinner.className = 'btn btn-outline-warning mt-3'
         } else if (localStorage.mostrWinner) {
@@ -308,8 +374,20 @@ setInterval(() => {
             mostrWinner.className = 'btn btn-outline-danger mt-3'
         }
     }
+
+    if (localStorage.record_click >= 2500 && !localStorage.skillovik) {
+        skillovik.innerText = 'Забрать 25 монет'
+        skillovik.className = 'btn btn-outline-primary mt-3'
+    } else {
+        if (localStorage.record_click <= 2500) {
+            skillovik.innerText = 'В процессе'
+            skillovik.className = 'btn btn-outline-warning mt-3'
+        } else if (localStorage.skillovik) {
+            skillovik.innerText = 'Получено'
+            skillovik.className = 'btn btn-outline-danger mt-3'
+        }
+    }
 }, 50)
 
 if (localStorage.fermMoney) setInterval(() => localStorage.money++, 12000)
-
 play()

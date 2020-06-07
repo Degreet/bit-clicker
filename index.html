@@ -27,7 +27,7 @@
             <h1>Монеты: <span id="money">0</span></h1>
         </div>
         <div>
-            <img id="coin" src="img/coin.png" alt="bitcoin">
+            <img id="coin" src="img/coin.svg" alt="bitcoin">
         </div>
     </section>
 
@@ -115,12 +115,33 @@
                         </div>
                         <button class="btn btn-outline-danger mt-3" id="teperProfi">Не доступно</button>
                     </div>
-                    <div class="block">
+                    <div class="block mb-5">
                         <div>
-                            <h3>Монстр - Победитель!</h3>
+                            <h3>Мастер</h3>
                             <span class="text-muted">Чтобы получить, поставьте рекорд не меньше 1000 очков</span>
                         </div>
+                        <button class="btn btn-outline-danger mt-3" id="master">Не доступно</button>
+                    </div>
+                    <div class="block mb-5">
+                        <div>
+                            <h3>Король</h3>
+                            <span class="text-muted">Чтобы получить, поставьте рекорд не меньше 1500 очков</span>
+                        </div>
+                        <button class="btn btn-outline-danger mt-3" id="korol">Не доступно</button>
+                    </div>
+                    <div class="block mb-5">
+                        <div>
+                            <h3>Монстр</h3>
+                            <span class="text-muted">Чтобы получить, поставьте рекорд не меньше 2000 очков</span>
+                        </div>
                         <button class="btn btn-outline-danger mt-3" id="mostrWinner">Не доступно</button>
+                    </div>
+                    <div class="block">
+                        <div>
+                            <h3>Скилловик</h3>
+                            <span class="text-muted">Чтобы получить, поставьте рекорд не меньше 2500 очков</span>
+                        </div>
+                        <button class="btn btn-outline-danger mt-3" id="skillovik">Не доступно</button>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -157,6 +178,7 @@
     </div>
 
     <a data-toggle="modal" data-target="#resultRound" href="" id="resultRoundHref"></a>
+    <h1 id="roundStartText" class="unactive">Раунд начался!</h1>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>

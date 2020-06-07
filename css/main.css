@@ -138,6 +138,7 @@ header {
     /* display: none; */
     margin-left: 100px;
     transition: all .1s ease;
+    width: 256px;
 }
 
 #main div img.active {
@@ -153,6 +154,29 @@ header {
 #main div img:active {
     margin-top: 10px;
     transform: scale(.9);
+}
+
+#roundStartText {
+    font-size: 100px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 4px solid #fff;
+    user-select: none;
+    outline: none;
+}
+
+#roundStartText.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: animate-round-start-text 1s;
+}
+
+#roundStartText.unactive {
+    display: none;
 }
 
 @media screen and (max-width: 687px) {
@@ -182,6 +206,11 @@ header {
 
     .btn-grey {
         margin-right: -5px;
+    }
+
+    #roundStartText {
+        font-size: 30px;
+        border: none;
     }
 
     .btns {
@@ -228,5 +257,22 @@ header {
         display: flex;
         justify-content: center;
         margin-top: 20px;
+    }
+}
+
+@keyframes animate-round-start-text {
+    0% {
+        transform: scale(.3);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
     }
 }
